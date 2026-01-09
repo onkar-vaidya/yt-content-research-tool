@@ -397,15 +397,28 @@ def scrape_single_keyword(keyword, output_file):
                                         duration_str = f"{int(m)}:{int(s):02d}"
                                 else:
                                     duration_str = 'N/A'
+                            
+                            # Upload date formatting
+                            upload_date = entry.get('upload_date', 'N/A')
+                            if upload_date and upload_date != 'N/A':
+                                # Convert YYYYMMDD to YYYY-MM-DD
+                                try:
+                                    upload_date = f"{upload_date[:4]}-{upload_date[4:6]}-{upload_date[6:]}"
+                                except:
+                                    upload_date = 'N/A'
 
                             results_to_save.append([
                                 keyword,
                                 rank_counter,
                                 title,
                                 entry.get('uploader') or entry.get('channel') or 'N/A',
+                                entry.get('channel_follower_count') or entry.get('subscriber_count', 'N/A'),
                                 entry.get('view_count', 0),
-                                entry.get('url') or entry.get('webpage_url'),
-                                duration_str
+                                entry.get('like_count', 'N/A'),
+                                entry.get('comment_count', 'N/A'),
+                                upload_date,
+                                duration_str,
+                                entry.get('url') or entry.get('webpage_url')
                             ])
                             rank_counter += 1
             break
@@ -491,7 +504,7 @@ def scrape_videos(keywords_file, descriptive_name=None):
         # Create file with header
         with open(output_file, 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
-            writer.writerow(['Keyword', 'Rank', 'Video Title', 'Channel', 'Views', 'Video Link', 'Duration'])
+            writer.writerow(['Keyword', 'Rank', 'Title', 'Channel', 'Subscribers', 'Views', 'Likes', 'Comments_Count', 'Upload_Date', 'Duration', 'Link'])
 
     keywords_to_do = [k for k in keywords if k not in processed_keywords]
     
