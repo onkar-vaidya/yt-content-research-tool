@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Output folders (keep folder structure, ignore data)
+Keywords/*
+!Keywords/.gitkeep
+Videos/*
+!Videos/.gitkeep
+
+# Log files
+*.log
+
+# Credentials (if any)
+*.json
+!sooperblooper-llp-1c5047cbe8aa.json
+
+# Temporary files
+*.tmp
+*.bak
+
+# Input file (user-specific, keep template)
+InputKeywords.txt
